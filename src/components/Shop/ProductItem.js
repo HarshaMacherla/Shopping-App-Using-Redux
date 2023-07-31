@@ -4,7 +4,7 @@ import classes from "./ProductItem.module.css";
 import { cartActions } from "../../store/cart-slice";
 
 const ProductItem = (props) => {
-  const { title, price, description } = props;
+  const { id, title, price, description } = props;
 
   const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const ProductItem = (props) => {
   };
 
   return (
-    <li className={classes.item} key={title}>
+    <li className={classes.item} key={id}>
       <Card>
         <header>
           <h3>{title}</h3>
@@ -22,7 +22,7 @@ const ProductItem = (props) => {
         <p>{description}</p>
         <div className={classes.actions}>
           <button
-            onClick={() => handleAddToCart({ title, price, description })}
+            onClick={() => handleAddToCart({ id, title, price, description })}
           >
             Add to Cart
           </button>

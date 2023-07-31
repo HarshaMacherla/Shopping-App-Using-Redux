@@ -3,7 +3,7 @@ import classes from "./CartItem.module.css";
 import { cartActions } from "../../store/cart-slice";
 
 const CartItem = (props) => {
-  const { title, quantity, total, price } = props.item;
+  const { id, title, quantity, total, price } = props.item;
 
   const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const CartItem = (props) => {
   };
 
   return (
-    <li className={classes.item} key={title}>
+    <li className={classes.item} key={id}>
       <header>
         <h3>{title}</h3>
         <div className={classes.price}>
@@ -31,8 +31,8 @@ const CartItem = (props) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button onClick={() => handleDecreaseQuantity({ title })}>-</button>
-          <button onClick={() => handleIncreaseQuantity({ title })}>+</button>
+          <button onClick={() => handleDecreaseQuantity({ id })}>-</button>
+          <button onClick={() => handleIncreaseQuantity({ id })}>+</button>
         </div>
       </div>
     </li>

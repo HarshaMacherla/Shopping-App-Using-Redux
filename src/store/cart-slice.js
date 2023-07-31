@@ -3,40 +3,40 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    showCart: false,
     cartItems: [],
+    itemsInCart: 0,
   },
   reducers: {
-    showCart(state) {
-      state.showCart = !state.showCart;
-    },
     addToCart(state, action) {
       const index = state.cartItems.findIndex(
-        (product) => product.title === action.payload.title
+        (product) => product.id === action.payload.id
       );
       if (index === -1) {
         state.cartItems.push({ ...action.payload, quantity: 1 });
       } else {
         state.cartItems[index].quantity += 1;
       }
+      state.itemsInCart += 1;
     },
     increaseQuantity(state, action) {
       const index = state.cartItems.findIndex(
-        (prodcut) => prodcut.title === action.payload.title
+        (product) => product.id === action.payload.id
       );
       state.cartItems[index].quantity += 1;
+      state.itemsInCart += 1;
     },
     decreaseQuantity(state, action) {
       const index = state.cartItems.findIndex(
-        (product) => product.title === action.payload.title
+        (product) => product.id === action.payload.id
       );
       if (state.cartItems[index].quantity === 1) {
         state.cartItems = state.cartItems.filter(
-          (item) => item.title !== action.payload.title
+          (item) => item.id !== action.payload.id
         );
       } else {
         state.cartItems[index].quantity -= 1;
       }
+      state.itemsInCart -= 1;
     },
   },
 });
